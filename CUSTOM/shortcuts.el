@@ -27,13 +27,6 @@
         (message "Pasted from clipboard."))
     (insert (shell-command-to-string "xsel -o -b"))))
 
-(defun org-insert-source-block (language)
-  "Asks for language. Inserts org-mode source code snippet."
-  (interactive "slanguage? ")
-  (insert (format "#+begin_src %s\n#+end_src" language))
-  (forward-line -1)
-  (goto-char (line-end-position)))
-
 (defun zw/create-sch-org-file (module-code fname title)
   "Creates an org file with appropriate metadata in the variable
    <my-sch-directory>. Prompts for title."
