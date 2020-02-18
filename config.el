@@ -24,6 +24,7 @@
 (add-hook 'org-mode-hook 'org-indent-mode)
 (add-hook 'org-mode-hook 'yascroll-bar-mode)
 (add-hook 'org-mode-hook 'zorg-mode)
+(add-hook 'org-mode-hook 'turn-off-auto-fill)
 
 ;;;;;;;;;;;;;;;;;;;
 ;; OTHER CONFIGS ;;
