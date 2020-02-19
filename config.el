@@ -14,10 +14,11 @@
                  ))
     (mapc load-it (directory-files dir nil "\\.el$"))))
 
-(load-directory "~/.doom.d/CUSTOM")
+(load-directory "~/.doom.d/custom")
 
-;; Maximise screen on startup
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; Maximise screen and fullscreen on startup
+(toggle-frame-maximized)
+(toggle-frame-fullscreen)
 
 ;; Add org mode hooks
 (add-hook 'org-mode-hook 'visual-line-mode)

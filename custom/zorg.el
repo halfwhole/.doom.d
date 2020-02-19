@@ -6,16 +6,12 @@
   (setq line-spacing 0.1)
   (setq right-margin-width 1)
 
-  (setq-local adaptive-wrap-prefix-mode 0)       ;; Disables adaptive-wrap so that org-indent-mode can do its thing
-  ;; NOTE: I have disabled adaptive-wrap-prefix-mode globally (I think).
-  ;; To re-enable, go to ~./.emacs.d/layers/+spacemacs/spacemacs-editing-visual/packages.el.
-
   (setq org-pretty-entities t)        ;; Pretty-entities allows the use of \ast{} for *, \plus{} for +, \under{} for _, etc.
   (setq org-hide-emphasis-markers t)  ;; Hides text formatting (e.g. bold, italics, underline)
   (setq org-emphasis-alist '(("*" bold)
                              ("/" italic)
                              ("_" underline)
-							 ("+" (:strike-through t))
+                             ("+" (:strike-through t))
                              ("=" org-verbatim verbatim)
                              ("~" region)))
 
