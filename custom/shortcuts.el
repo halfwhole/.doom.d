@@ -156,3 +156,13 @@
 ;; Make up/down operate in screen lines instead of logical lines, in both normal and visual mode
 (map! :nv "j" 'evil-next-visual-line)
 (map! :nv "k" 'evil-previous-visual-line)
+
+;; Have extra keybindings for winner undo and redo
+(map! "C-c h" 'winner-undo)
+(map! "C-c l" 'winner-redo)
+
+;; Enable left/right movement shortcuts in DocView
+(add-hook 'doc-view-mode-hook
+          '(lambda ()
+             (map! :map evil-motion-state-local-map "h" 'doc-view-previous-page)
+             (map! :map evil-motion-state-local-map "l" 'doc-view-next-page)))
