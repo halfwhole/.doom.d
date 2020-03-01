@@ -149,6 +149,9 @@
 (map! :leader :desc "Copy to clipboard" "o y" 'copy-to-clipboard)
 (map! :leader :desc "Paste from clipboard" "o p" 'paste-from-clipboard)
 
+;; Enable <SPC o n> for disabling search highlighting in vim
+(map! :leader :desc "Disable search highlighting" "o n" 'evil-ex-nohighlight)
+
 ;; Enable <SPC o t> for opening tree view for org mode, <SPC o s> for switching between tree and cloned view
 (map! :leader :desc "Open tree view" "o t" 'open-tree-view)
 (map! :leader :desc "Jump to same position in other buffer" "o s" 'jump-to-same-position-in-other-buffer)

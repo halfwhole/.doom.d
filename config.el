@@ -7,7 +7,7 @@
 ;; PERSONAL CONFIGS ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
-;; Load custom directory
+;; Load all files in custom directory
 (defun load-directory (dir)
   (let ((load-it (lambda (f)
                    (load-file (concat (file-name-as-directory dir) f)))
@@ -26,6 +26,9 @@
 (add-hook 'org-mode-hook 'yascroll-bar-mode)
 (add-hook 'org-mode-hook 'zorg-mode)
 (add-hook 'org-mode-hook 'turn-off-auto-fill)
+
+;; Set default directory
+(setq default-directory "~/Documents/AY2S2")
 
 ;;;;;;;;;;;;;;;;;;;
 ;; OTHER CONFIGS ;;
