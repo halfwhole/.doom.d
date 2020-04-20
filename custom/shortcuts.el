@@ -142,12 +142,20 @@
       (other-window 1)
       (goto-char pos))))
 
+(defun browse-file-directory ()
+  "Opens the directory containing the current file."
+  (interactive)
+  (if default-directory
+      (browse-url-of-file (expand-file-name default-directory))))
 
 ;;;; KEYBOARD SHORTCUTS
 
 ;; Enable <SPC o y> and <SPC o p> for cutting, copying to, and pasting from the clipboard respectively
 (map! :leader :desc "Copy to clipboard" "o y" 'copy-to-clipboard)
 (map! :leader :desc "Paste from clipboard" "o p" 'paste-from-clipboard)
+
+;; Enable <SPC o c> for opening default directory of current buffer
+(map! :leader :desc "Open file directory" "o c" 'browse-file-directory)
 
 ;; Enable <SPC o n> for disabling search highlighting in vim
 (map! :leader :desc "Disable search highlighting" "o n" 'evil-ex-nohighlight)
