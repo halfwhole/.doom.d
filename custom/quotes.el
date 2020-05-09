@@ -2,6 +2,15 @@
 
 (setq quotes-text-file "~/.doom.d/personal/quotes.txt")
 
+;; If 'quotes-text-file' or its directory does not exist,
+;; create the directory, and create a default 'quotes-text-file'
+(let ((quotes-text-directory (file-name-directory quotes-text-file)))
+  (unless (file-exists-p quotes-text-directory)
+    (make-directory quotes-text-directory))
+  (unless (file-exists-p quotes-text-file)
+    (write-region "Welcome! Please edit 'quotes.txt' to insert your custom quotes." nil quotes-text-file)))
+
+;; Replace default 'doom-dashboard-widget-banner' with custom 'my-dashboard-widget-banner'
 (setq +doom-dashboard-functions
       (cons 'my-dashboard-widget-banner
             (delete 'doom-dashboard-widget-banner +doom-dashboard-functions)))
