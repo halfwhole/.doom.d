@@ -28,7 +28,7 @@
 (add-hook 'org-mode-hook 'turn-off-auto-fill)
 
 ;; Set default directory
-(setq default-directory "~/Documents/AY2S2")
+(setq default-directory "~/Documents/AY2S2/")
 
 ;;;;;;;;;;;;;;;;;;;
 ;; OTHER CONFIGS ;;

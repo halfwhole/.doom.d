@@ -15,6 +15,8 @@
                              ("=" org-verbatim verbatim)
                              ("~" region)))
 
+  (setq org-confirm-babel-evaluate t)  ;; Prompt before running source code in Org mode
+
   ;; Sets font and parameters for the headlines
   (let* ((variable-tuple (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
                                ((x-list-fonts "Verdana")         '(:font "Verdana"))
