@@ -57,8 +57,6 @@
 
 (defconst +nyan-directory+ (file-name-directory (or load-file-name buffer-file-name)))
 
-(defconst +nyan-cat-size+ 3)
-
 (defconst +nyan-rainbow-image+ (concat +nyan-directory+ "img/rainbow.xpm"))
 (defconst +nyan-outerspace-image+ (concat +nyan-directory+ "img/outerspace.xpm"))
 
@@ -101,11 +99,10 @@ This is important because nyan-mode will push out all informations from small wi
                          (/ (- (float (point))
                                (float (point-min)))
                             (float (point-max)))))
-               (- nyan-bar-length +nyan-cat-size+))
+               nyan-bar-length)
             100)))
 
 (defun nyan-scroll-buffer (percentage buffer)
-  (interactive)
   (with-current-buffer buffer
     (goto-char (floor (* percentage (point-max))))))
 
@@ -118,7 +115,7 @@ This is important because nyan-mode will push out all informations from small wi
   (if (< (window-width) nyan-minimum-window-width)
       ""                                ; disabled for too small windows
     (let* ((rainbows (nyan-number-of-rainbows))
-           (outerspaces (- nyan-bar-length rainbows +nyan-cat-size+))
+           (outerspaces (- nyan-bar-length rainbows))
            (rainbow-string "")
            (xpm-support (image-type-available-p 'xpm))
            (outerspace-string "")
@@ -138,7 +135,7 @@ This is important because nyan-mode will push out all informations from small wi
                                              (propertize "-"
                                                          'display (create-image +nyan-outerspace-image+ 'xpm nil :ascent 'center))
                                            "-")
-                                         (/ (float (+ rainbows +nyan-cat-size+ number)) nyan-bar-length) buffer))))
+                                         (/ (float (+ rainbows number)) nyan-bar-length) buffer))))
       ;; Compute Nyan Cat string.
       (propertize (concat rainbow-string outerspace-string) 'help-echo +nyan-modeline-help-string+))))
 

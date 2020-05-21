@@ -1,6 +1,60 @@
 /* XPM */
 static char *rainbow[] = {
 /* columns rows colors chars-per-pixel */
+"8 12 6 1 ",
+"X c #FF0018",
+"o c #FFA52C",
+"@ c #FFFF41",
+"= c #008018",
+"- c #0000F9",
+"< c #86007D",
+/* pixels */
+"XXXXXXXX",
+"XXXXXXXX",
+"oooooooo",
+"oooooooo",
+"@@@@@@@@",
+"@@@@@@@@",
+"========",
+"========",
+"--------",
+"--------",
+"<<<<<<<<",
+"<<<<<<<<"
+};
+
+static char *rainbow_large[] = {
+/* columns rows colors chars-per-pixel */
+"8 18 6 1 ",
+"X c #FF0018",
+"o c #FFA52C",
+"@ c #FFFF41",
+"= c #008018",
+"- c #0000F9",
+"< c #86007D",
+/* pixels */
+"XXXXXXXX",
+"XXXXXXXX",
+"XXXXXXXX",
+"oooooooo",
+"oooooooo",
+"oooooooo",
+"@@@@@@@@",
+"@@@@@@@@",
+"@@@@@@@@",
+"========",
+"========",
+"========",
+"--------",
+"--------",
+"--------",
+"<<<<<<<<",
+"<<<<<<<<",
+"<<<<<<<<"
+};
+
+static char *rainbow_old[] = {
+/* columns rows colors chars-per-pixel */
 "8 15 21 1 ",
 "  c #522244",
 ". c #BF1119",
