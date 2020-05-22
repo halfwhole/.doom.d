@@ -85,8 +85,8 @@ This is important because nyan-mode will push out all informations from small wi
          (nyan-refresh))
   :group 'nyan)
 
-(defcustom nyan-bar-length 32
-  "Length of Nyan Cat bar in units; each unit is equal to an 8px
+(defcustom nyan-bar-length 64
+  "Length of Nyan Cat bar in units; each unit is equal to an 4px
   image. Minimum of 3 units are required for Nyan Cat."
   :type 'integer
   :set (lambda (sym val)
