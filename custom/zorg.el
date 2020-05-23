@@ -17,6 +17,10 @@
 
   (setq org-confirm-babel-evaluate t)  ;; Prompt before running source code in Org mode
 
+  ;; Smartparens configs
+  (sp-local-pair 'org-mode "{" nil :actions :rem) ;; Disable {} autocompletion
+  (sp-local-pair 'org-mode "$" "$")               ;; Enable $$ autocompletion
+
   ;; Sets font and parameters for the headlines
   (let* ((variable-tuple (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
                                ((x-list-fonts "Verdana")         '(:font "Verdana"))
