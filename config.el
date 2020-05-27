@@ -20,6 +20,9 @@
 (toggle-frame-maximized)
 (toggle-frame-fullscreen)
 
+;; Add clock
+(display-time-mode)
+
 ;; Add org mode hooks
 (add-hook 'org-mode-hook 'visual-line-mode)
 (add-hook 'org-mode-hook 'org-indent-mode)
