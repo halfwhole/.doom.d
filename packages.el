@@ -2,6 +2,7 @@
 ;;; $DOOMDIR/packages.el
 
 (package! yaml-mode)
+(package! json-mode)
 
 ;; This is where you install packages, by declaring them with the `package!'
 ;; macro, then running 'doom refresh' on the command line. You'll need to
