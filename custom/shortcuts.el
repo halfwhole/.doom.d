@@ -172,8 +172,12 @@
 (map! "C-c h" 'winner-undo)
 (map! "C-c l" 'winner-redo)
 
-;; Enable left/right movement shortcuts in DocView
+;; Enable <h>/<l> for left/right movement shortcuts in DocView
 (add-hook 'doc-view-mode-hook
           '(lambda ()
              (map! :map evil-motion-state-local-map "h" 'doc-view-previous-page)
              (map! :map evil-motion-state-local-map "l" 'doc-view-next-page)))
+
+;; Enable <SPC TAB <> and <SPC TAB >> for shifting left/right of workspaces
+(map! :leader "TAB <" '+workspace/swap-left)
+(map! :leader "TAB >" '+workspace/swap-right)
