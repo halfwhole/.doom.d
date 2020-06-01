@@ -169,8 +169,8 @@
 (map! :nv "k" 'evil-previous-visual-line)
 
 ;; Have extra keybindings for winner undo and redo
-(map! "C-c h" 'winner-undo)
-(map! "C-c l" 'winner-redo)
+(map! "C-c [" 'winner-undo)
+(map! "C-c ]" 'winner-redo)
 
 ;; Enable <h>/<l> for left/right movement shortcuts in DocView
 (add-hook 'doc-view-mode-hook
