@@ -30,9 +30,6 @@
 (add-hook 'org-mode-hook 'zorg-mode)
 (add-hook 'org-mode-hook 'turn-off-auto-fill)
 
-;; Set default directory
-(setq default-directory "~/Documents/AY2S2/")
-
 (nyan-mode)
 
 ;;;;;;;;;;;;;;;;;;;
