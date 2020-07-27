@@ -18,8 +18,13 @@
   (setq org-confirm-babel-evaluate t)  ;; Prompt before running source code in Org mode
 
   ;; Smartparens configs
-  (sp-local-pair 'org-mode "{" nil :actions :rem) ;; Disable {} autocompletion
-  (sp-local-pair 'org-mode "$" "$")               ;; Enable $$ autocompletion
+  (sp-local-pair 'org-mode "{" nil :actions :rem)                            ;; Disable {} autocompletion
+  ;; TODO:
+  ;; Disable only when it's after a caret (^) or underscor (_)
+  (sp-local-pair 'org-mode "$" "$" :post-handlers '(:rem ("||\n[i]" "RET"))) ;; Enable $$ autocompletion
+  ;; TODO:
+  ;; Backspace after inserting a new $ should remove the entire pair $$.
+  ;; Inserting a new $ after a symbol like ) or } should have no effect (not just word characters).
 
   ;; Sets font and parameters for the headlines
   (let* ((variable-tuple (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
