@@ -1,6 +1,6 @@
 ;;;; PARAMETERS AND VARIABLES
 
-(defvar my-sch-directory "~/Documents/AY2S2/")
+(defvar my-sch-directory "~/Documents/AY3S1/")
 
 ;;;; FUNCTION DEFINITIONS
 
