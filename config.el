@@ -20,8 +20,9 @@
 (toggle-frame-maximized)
 (toggle-frame-fullscreen)
 
-;; Add clock
+;; Add time and battery display
 (display-time-mode)
+(display-battery-mode)
 
 ;; Add org mode hooks
 (add-hook 'org-mode-hook 'visual-line-mode)
