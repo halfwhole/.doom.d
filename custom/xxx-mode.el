@@ -96,16 +96,4 @@
         (setcar mode-line-position '(:eval (list (xxx-create)))))
     (setcar mode-line-position xxx-old-car-mode-line-position)))
 
-;;;###autoload
-(define-minor-mode xxx-mode
-  "TEMP"
-  :global t
-  :group 'xxx
-  (if xxx-mode
-      (progn
-        (unless xxx-old-car-mode-line-position
-          (setq xxx-old-car-mode-line-position (car mode-line-position)))
-        (setcar mode-line-position '(:eval (list (xxx-create)))))
-    (setcar mode-line-position xxx-old-car-mode-line-position)))
-
 (provide 'xxx-mode)
