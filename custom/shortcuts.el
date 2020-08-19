@@ -1,8 +1,14 @@
-;;;; PARAMETERS AND VARIABLES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; PARAMETERS AND VARIABLES ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defvar my-sch-directory "~/Documents/AY3S1/")
 
-;;;; FUNCTION DEFINITIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; FUNCTION DEFINITIONS ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;; COPY AND PASTE
 
 (defun copy-to-clipboard ()
   "Copies selection to clipboard."
@@ -27,38 +33,20 @@
         (message "Pasted from clipboard."))
     (insert (shell-command-to-string "xsel -o -b"))))
 
-(defun zw/create-sch-org-file (module-code fname title)
-  "Creates an org file with appropriate metadata in the variable
-   <my-sch-directory>. Prompts for title."
-  (interactive "sModule code? \nsFilename? \nsTitle? ")
-  (let* ((date-string (format-time-string "[%Y-%m-%d]"))
-         (file-name fname)
-         (destination (format "%s%s/%s.org" my-sch-directory module-code file-name))
-         (formatted-head (format
+;;;; CUSTOM ORG FILE TEMPLATES
+
+(defvar sch-org-file-template ;; supply <title>
 "#+TITLE: %s
-#+DATE: %s
 #+LATEX_HEADER: \\usepackage{indentfirst}
 #+LATEX_HEADER: \\usepackage{parskip}  \\setlength{\\parindent}{15pt}
 #+LATEX_HEADER: \\usepackage{sectsty}  \\setcounter{secnumdepth}{2}
 #+LATEX_HEADER: \\usepackage{titlesec} \\newcommand{\\sectionbreak}{\\clearpage}
 #+LATEX_HEADER: \\usepackage[margin=0.5in]{geometry}
 #+LATEX_HEADER: \\usepackage[outputdir=Output]{minted}
-#+OPTIONS: toc:2 author:nil\n"
-                                 title date-string)))
-    (write-region formatted-head nil destination)
-    (switch-to-buffer (find-file-noselect destination))
-    (goto-char (point-max))))
+#+OPTIONS: toc:2 author:nil date:nil\n")
 
-(defun zw/create-sch-org-cheatsheet (module-code fname title)
-  "Creates an org cheatsheet with appropriate metadata in the variable
-   <my-sch-directory>. Prompts for title."
-  (interactive "sModule code? \nsFilename? \nsTitle? ")
-  (let* ((date-string (format-time-string "[%Y-%m-%d]"))
-         (file-name fname)
-         (destination (format "%s%s/%s.org" my-sch-directory module-code file-name))
-         (formatted-head (format
+(defvar sch-org-cheatsheet-template ;; supply <title> <title>
 "#+TITLE: %s
-#+DATE: %s
 #+LATEX_CLASS: article
 #+LATEX_HEADER: \\usepackage{parskip}  \\setlength{\\parindent}{0pt} \\setlength{\\parskip}{2pt}
 #+LATEX_HEADER: \\usepackage{sectsty} \\setcounter{secnumdepth}{1} \\allsectionsfont{\\raggedright}
@@ -67,7 +55,7 @@
 #+LATEX_HEADER: \\usepackage[a4paper, landscape, margin=0.3in]{geometry}
 #+LATEX_HEADER: \\usepackage{multicol}
 #+LATEX_HEADER: \\usepackage[outputdir=Output]{minted}
-#+OPTIONS: author:nil title:nil toc:nil
+#+OPTIONS: author:nil title:nil toc:nil date:nil
 
 \\centering
 \\header{%s}
@@ -78,15 +66,52 @@
 
 <insert text here>
 
-\\end{multicols*}\n"
-                          title date-string title)))
+\\end{multicols*}\n")
+
+(defvar sch-org-tutorial-template ;; supply <title>
+"#+TITLE: %s
+#+AUTHOR: <fill me in>
+#+LATEX_HEADER: \\usepackage{indentfirst}
+#+LATEX_HEADER: \\usepackage{parskip}  \\setlength{\\parindent}{15pt}
+#+LATEX_HEADER: \\usepackage{sectsty}  \\setcounter{secnumdepth}{2}
+#+LATEX_HEADER: \\usepackage[margin=0.5in]{geometry}
+#+OPTIONS: toc:nil date:nil num:nil\n")
+
+(defun zw/create-sch-org-file (module-code fname title)
+  "Creates an org file with appropriate metadata in the variable
+   <my-sch-directory>. Prompts for title."
+  (interactive "sModule code? \nsFilename? \nsTitle? ")
+  (let* ((date-string (format-time-string "[%Y-%m-%d]"))
+         (file-name fname)
+         (destination (format "%s%s/%s.org" my-sch-directory module-code file-name))
+         (formatted-head (format sch-org-file-template title)))
     (write-region formatted-head nil destination)
     (switch-to-buffer (find-file-noselect destination))
     (goto-char (point-max))))
 
-(defun clear-register ()
-  (interactive)
-  (setq register-alist nil))
+(defun zw/create-sch-org-cheatsheet (module-code fname title)
+  "Creates an org cheatsheet with appropriate metadata in the variable
+   <my-sch-directory>. Prompts for title."
+  (interactive "sModule code? \nsFilename? \nsTitle? ")
+  (let* ((file-name fname)
+         (destination (format "%s%s/%s.org" my-sch-directory module-code file-name))
+         (formatted-head (format sch-org-cheatsheet-template title title)))
+    (write-region formatted-head nil destination)
+    (switch-to-buffer (find-file-noselect destination))
+    (goto-char (point-max))))
+
+(defun zw/create-sch-org-tutorial (module-code fname title)
+  "Creates an org tutorial with appropriate metadata in the variable
+   <my-sch-directory>. Prompts for title."
+  (interactive "sModule code? \nsFilename? \nsTitle? ")
+  (let* ((file-name fname)
+         (destination (format "%s%s/%s.org" my-sch-directory module-code file-name))
+         (formatted-head (format sch-org-tutorial-template title)))
+    (write-region formatted-head nil destination)
+    (switch-to-buffer (find-file-noselect destination))
+    (goto-char (point-max))))
+
+;;;; TREE VIEW
 
 (defun open-tree-view ()
   "Open a clone of the current buffer to the left, resize it to 40 columns, and bind <mouse-1> to jump to the same position in the base buffer."
@@ -133,14 +158,7 @@
         (show-branches))
       (evil-scroll-line-to-top (line-number-at-pos (point))))))
 
-(defun jump-to-same-position-in-other-buffer ()
-  "Switch to the other buffer and move point to the same cursor position."
-  (interactive)
-  (if (buffer-base-buffer)
-      (jump-to-point-and-show)
-    (let ((pos (point)))
-      (other-window 1)
-      (goto-char pos))))
+;;;; MISCELLANEOUS
 
 (defun browse-file-directory ()
   "Opens the directory containing the current file."
@@ -148,7 +166,9 @@
   (if default-directory
       (browse-url-of-file (expand-file-name default-directory))))
 
-;;;; KEYBOARD SHORTCUTS
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; KEYBOARD SHORTCUTS ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Enable <SPC o y> and <SPC o p> for cutting, copying to, and pasting from the clipboard respectively
 (map! :leader :desc "Copy to clipboard" "o y" 'copy-to-clipboard)
@@ -160,9 +180,8 @@
 ;; Enable <SPC o n> for disabling search highlighting in vim
 (map! :leader :desc "Disable search highlighting" "o n" 'evil-ex-nohighlight)
 
-;; Enable <SPC o t> for opening tree view for org mode, <SPC o s> for switching between tree and cloned view
+;; Enable <SPC o t> for opening tree view for org mode
 (map! :leader :desc "Open tree view" "o t" 'open-tree-view)
-(map! :leader :desc "Jump to same position in other buffer" "o s" 'jump-to-same-position-in-other-buffer)
 
 ;; Make up/down operate in screen lines instead of logical lines, in both normal and visual mode
 (map! :nv "j" 'evil-next-visual-line)
