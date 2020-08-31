@@ -15,13 +15,27 @@
   (interactive)
   (if (display-graphic-p)
       (progn
-        (message "Yanked region to clipboard.")
+        (message "Yanked to clipboard.")
         (call-interactively 'clipboard-kill-ring-save))
     (if (region-active-p)
         (progn
           (shell-command-on-region (region-beginning) (region-end) "xsel -i -b")
           (message "Yanked to clipboard.")
           (deactivate-mark))
+      (message "No region active; can't yank to clipboard."))))
+
+(defun cut-to-clipboard ()
+  "Cuts selection to clipboard."
+  (interactive)
+  (if (display-graphic-p)
+      (progn
+        (message "Cut to clipboard.")
+        (call-interactively 'clipboard-kill-region))
+    (if (region-active-p)
+        (progn
+          (shell-command-on-region (region-beginning) (region-end) "xsel -i -b")
+          (message "Cut to clipboard.")
+          (evil-delete))
       (message "No region active; can't yank to clipboard."))))
 
 (defun paste-from-clipboard ()
@@ -172,6 +186,7 @@
 
 ;; Enable <SPC o y> and <SPC o p> for cutting, copying to, and pasting from the clipboard respectively
 (map! :leader :desc "Copy to clipboard" "o y" 'copy-to-clipboard)
+(map! :leader :desc "Cut to clipboard" "o x" 'cut-to-clipboard)
 (map! :leader :desc "Paste from clipboard" "o p" 'paste-from-clipboard)
 
 ;; Enable <SPC o c> for opening default directory of current buffer
